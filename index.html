@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor - Monteur Vidéo & Expert Vidéo Marketing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,106.7C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            animation: wave 15s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section générale */
+        section {
+            padding: 5rem 10%;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #ff6b6b;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* À propos */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-info p {
+            color: #666;
+        }
+
+        /* Méthode de travail */
+        .method {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .method h2::after {
+            background: white;
+        }
+
+        .method-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: scale(1.05);
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .step h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Tarifs */
+        .pricing {
+            background: #f8f9fa;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b6b;
+        }
+
+        .pricing-card.featured {
+            border-color: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        .price {
+            font-size: 3rem;
+            color: #667eea;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features li::before {
+            content: '✓ ';
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2::after {
+            background: white;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 5%;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#about">À Propos</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#methode">Ma Méthode</a></li>
+            <li><a href="#tarifs">Tarifs</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Victor</h1>
+            <p>Monteur Vidéo & Expert en Vidéo Marketing</p>
+            <a href="#contact" class="cta-button">Travaillons Ensemble</a>
+        </div>
+    </section>
+
+    <!-- À Propos -->
+    <section id="about" class="about">
+        <h2>Mon Histoire</h2>
+        <div class="about-content">
+            <p>Passionné par l'art du storytelling visuel, je transforme vos idées en vidéos percutantes qui captivent et convertissent.</p>
+            <p>Avec plusieurs années d'expérience dans le montage vidéo et le marketing digital, j'ai développé une expertise unique qui combine créativité artistique et stratégie marketing.</p>
+            <p>Ma mission ? Créer des contenus vidéo qui ne se contentent pas d'être beaux, mais qui génèrent de vrais résultats pour votre business.</p>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+        <h2>Mes Réalisations</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-img">🎬</div>
+                <div class="portfolio-info">
+                    <h3>Campagne Publicitaire E-commerce</h3>
+                    <p>Vidéo promotionnelle ayant généré +250% de conversions pour une marque de mode</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-img">📱</div>
+                <div class="portfolio-info">
+                    <h3>Série Réseaux Sociaux</h3>
+                    <p>20 vidéos courtes pour une startup tech, +2M de vues cumulées</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-img">🎥</div>
+                <div class="portfolio-info">
+                    <h3>Vidéo Explicative Entreprise</h3>
+                    <p>Motion design et montage pour présentation d'une solution SaaS</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-img">✨</div>
+                <div class="portfolio-info">
+                    <h3>Contenu YouTube</h3>
+                    <p>Montage régulier pour un créateur de contenu (500K abonnés)</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-img">🎯</div>
+                <div class="portfolio-info">
+                    <h3>Publicité Facebook Ads</h3>
+                    <p>Vidéos marketing optimisées pour la conversion (ROI x5)</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-img">🚀</div>
+                <div class="portfolio-info">
+                    <h3>Vidéo de Lancement Produit</h3>
+                    <p>Teaser et vidéo complète pour le lancement d'une application mobile</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Méthode de travail -->
+    <section id="methode" class="method">
+        <h2>Ma Méthode de Travail</h2>
+        <div class="method-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Brief & Stratégie</h3>
+                <p>Analyse de vos objectifs, votre audience et définition de la stratégie vidéo optimale</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Concept Créatif</h3>
+                <p>Proposition d'un concept visuel et narratif aligné avec votre marque</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Production</h3>
+                <p>Montage professionnel avec effets, animations et optimisation pour chaque plateforme</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Révisions & Livraison</h3>
+                <p>Ajustements selon vos retours et livraison des fichiers dans tous les formats nécessaires</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section id="tarifs" class="pricing">
+        <h2>Mes Tarifs</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">300€</div>
+                <p>Pour un projet simple</p>
+                <ul class="pricing-features">
+                    <li>Vidéo jusqu'à 1 minute</li>
+                    <li>Montage basique</li>
+                    <li>2 révisions incluses</li>
+                    <li>Livraison 5-7 jours</li>
+                    <li>1 format d'export</li>
+                </ul>
+                <a href="#contact" class="cta-button">Commencer</a>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Professionnel</h3>
+                <div class="price">800€</div>
+                <p>Le plus populaire</p>
+                <ul class="pricing-features">
+                    <li>Vidéo jusqu'à 3 minutes</li>
+                    <li>Montage avancé + effets</li>
+                    <li>4 révisions incluses</li>
+                    <li>Livraison 7-10 jours</li>
+                    <li>Tous formats d'export</li>
+                    <li>Motion design inclus</li>
+                </ul>
+                <a href="#contact" class="cta-button">Choisir</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <div class="price">Sur devis</div>
+                <p>Pour projets d'envergure</p>
+                <ul class="pricing-features">
+                    <li>Durée illimitée</li>
+                    <li>Montage expert + VFX</li>
+                    <li>Révisions illimitées</li>
+                    <li>Support prioritaire</li>
+                    <li>Stratégie marketing</li>
+                    <li>Suivi performance</li>
+                </ul>
+                <a href="#contact" class="cta-button">Discutons</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <h2>Travaillons Ensemble</h2>
+        <div class="contact-info">
+            <p>Prêt à donner vie à votre projet vidéo ?</p>
+            <p>📧 contact@victor-videoproduction.com</p>
+            <p>📱 +33 6 XX XX XX XX</p>
+        </div>
+        <a href="mailto:contact@victor-videoproduction.com" class="contact-button">Me Contacter</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Victor - Monteur Vidéo & Expert Vidéo Marketing. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.portfolio-item, .step, .pricing-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s, transform 0.6s';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
